@@ -1,23 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import Pokemon from '../types/pokemon'
-
-type GetAllPokemonsResponse = {
-  results: Pokemon[]
-  count: number
-  next: string | null
-  previous: string | null
-}
+import { PokemonMetaData, PokemonMetaDataResult } from 'types/pokemonMetaData'
+import { Pokemon } from 'types/pokemon'
+import { PokemonAbility } from 'types/pokemonAbility'
 
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
   endpoints: (builder) => ({
-    getAllPokemons: builder.query<Pokemon[], void>({
+    getAllPokemons: builder.query<PokemonMetaDataResult[], void>({
       // Limit 1126 in order to fetch all of the pokemon names
       query: () => `pokemon?limit=1126`,
-      transformResponse: (response: GetAllPokemonsResponse) => response.results
+      transformResponse: (response: PokemonMetaData) => response.results
+    }),
+    getPokemonByName: builder.query<Pokemon, string>({
+      query: (name) => `pokemon/${name}`
+    }),
+    getPokemonAbilityByName: builder.query<PokemonAbility, string>({
+      query: (name) => `ability/${name}`
     })
   })
 })
 
-export const { useGetAllPokemonsQuery } = pokemonApi
+export const { useGetAllPokemonsQuery, useGetPokemonByNameQuery } = pokemonApi
