@@ -6,16 +6,20 @@ const PokemonCard = () => {
   const selectedPokemon = useSelector(selectSelectedPokemon)
   return (
     <div className="w-6/12 h-3/4 border-4 border-breathomix-main">
-      <h1>{selectedPokemon?.name}</h1>
-      <h2>Abilities</h2>
-      {selectedPokemon?.abilities.map((ability) => {
-        return (
-          <PokemonAbility
-            key={ability.ability.name}
-            abilityName={ability.ability.name}
-          />
-        )
-      })}
+      {selectedPokemon ? (
+        <>
+          <h1>{selectedPokemon?.name}</h1>
+          <h2>Abilities</h2>
+          {selectedPokemon?.abilities.map((ability) => {
+            return (
+              <PokemonAbility
+                key={ability.ability.name}
+                abilityName={ability.ability.name}
+              />
+            )
+          })}
+        </>
+      ) : null}
     </div>
   )
 }
