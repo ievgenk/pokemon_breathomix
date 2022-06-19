@@ -1,15 +1,13 @@
 import { useGetAllPokemonsQuery } from '../redux/pokemonApi'
 import PokemonCard from './PokemonCard'
 import PokemonSearch from './PokemonSearch'
-import ResetPokemonButton from './ClearPokemonButton'
 
 function App() {
   const { error, isLoading } = useGetAllPokemonsQuery()
 
   return (
-    <main className="w-screen h-screen">
+    <main className="flex flex-col gap-10 justify-center items-center w-screen h-screen">
       <PokemonSearch />
-      <ResetPokemonButton />
       <PokemonCard />
     </main>
   )
