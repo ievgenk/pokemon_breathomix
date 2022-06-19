@@ -9,11 +9,6 @@ import { selectPokemon } from 'redux/slices/selectedPokemonSlice'
 import { useAppDispatch } from 'hooks/hooks'
 
 const PokemonSearch = () => {
-  const { data: pokemons } = useGetAllPokemonsQuery()
-  const dispatch = useAppDispatch()
-  const pokemonNames = pokemons?.map((pokemon) => pokemon.name) || []
-  const fuse = new Fuse(pokemonNames, { includeMatches: true, threshold: 0.3 })
-
   const [inputField, setInputField] = useState('')
   const [nameError, setNameError] = useState(false)
   const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null)
@@ -21,12 +16,17 @@ const PokemonSearch = () => {
     fuse.search(inputField)
   )
 
+  const { data: pokemons } = useGetAllPokemonsQuery()
   const { data: fetchedSelectedPokemon } = useGetPokemonByNameQuery(
     selectedPokemon || '',
     {
       skip: !selectedPokemon
     }
   )
+  const dispatch = useAppDispatch()
+
+  const pokemonNames = pokemons?.map((pokemon) => pokemon.name) || []
+  const fuse = new Fuse(pokemonNames, { includeMatches: true, threshold: 0.3 })
 
   useEffect(() => {
     if (fetchedSelectedPokemon) dispatch(selectPokemon(fetchedSelectedPokemon))
