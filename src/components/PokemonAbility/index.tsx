@@ -1,5 +1,7 @@
+import LoadingIndicator from 'components/Loading'
 import { useGetPokemonAbilityByNameQuery } from 'redux/pokemonApi'
 import { EffectEntry } from 'types/pokemonAbility'
+import { capitalizeString } from 'utils/index'
 
 type Props = {
   abilityName: string
@@ -18,9 +20,13 @@ const PokemonAbility = ({ abilityName }: Props) => {
       .effect
   }
 
-  return (
+  return isLoading ? (
+    <LoadingIndicator />
+  ) : (
     <>
-      <h3>{abilityName}</h3>
+      <h3 className="text-xl text-breathomix-main underline">
+        {capitalizeString(abilityName)}
+      </h3>
       <p>{retrievedAbilityDescription(data?.effect_entries)}</p>
     </>
   )
