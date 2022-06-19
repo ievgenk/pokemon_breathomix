@@ -14,7 +14,7 @@ export const selectedPokemonSlice = createSlice({
   name: 'selectedPokemon',
   initialState,
   reducers: {
-    selectPokemon: (state, action: PayloadAction<Pokemon>) => {
+    selectPokemon: (state, action: PayloadAction<Pokemon | null>) => {
       state.selectedPokemon = action.payload
     }
   }

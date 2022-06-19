@@ -1,12 +1,16 @@
 import Fuse from 'fuse.js'
+import React, { useEffect, useState } from 'react'
+
 import {
   useGetAllPokemonsQuery,
   useGetPokemonByNameQuery
 } from 'redux/pokemonApi'
-import { useEffect, useState } from 'react'
+import { selectPokemon } from 'redux/slices/selectedPokemonSlice'
+import { useAppDispatch } from 'hooks/hooks'
 
 const PokemonSearch = () => {
   const { data: pokemons } = useGetAllPokemonsQuery()
+  const dispatch = useAppDispatch()
   const pokemonNames = pokemons?.map((pokemon) => pokemon.name) || []
   const fuse = new Fuse(pokemonNames, { includeMatches: true, threshold: 0.3 })
 
@@ -24,8 +28,17 @@ const PokemonSearch = () => {
   )
 
   useEffect(() => {
+    if (fetchedSelectedPokemon) dispatch(selectPokemon(fetchedSelectedPokemon))
+  }, [fetchedSelectedPokemon])
+
+  useEffect(() => {
     setSuggestedPokemonNames(fuse.search(inputField))
   }, [inputField])
+
+  function setListItemPokemon(pokemonName) {
+    setSelectedPokemon(pokemonName)
+    setInputField('')
+  }
 
   return (
     <>
@@ -60,7 +73,17 @@ const PokemonSearch = () => {
         {suggestedPokemonNames.length ? (
           <ul role="list" className="divide-y-2 divide-breathomix-main">
             {suggestedPokemonNames.map(({ item, refIndex }) => (
-              <li key={`${refIndex}-${item}`} className="py-4" tabIndex={0}>
+              <li
+                key={`${refIndex}-${item}`}
+                className="py-4"
+                tabIndex={0}
+                onClick={(e) => setListItemPokemon(e.currentTarget.innerText)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setListItemPokemon(e.currentTarget.innerText)
+                  }
+                }}
+              >
                 {item}
               </li>
             ))}
