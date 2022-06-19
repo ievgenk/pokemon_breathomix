@@ -22,6 +22,7 @@ export const selectedPokemonSlice = createSlice({
 
 export const { selectPokemon } = selectedPokemonSlice.actions
 
-export const selectSelectedPokemon = (state: RootState) => state.selectedPokemon
+export const selectSelectedPokemon = (state: RootState) =>
+  state.selectedPokemon.selectedPokemon
 
 export default selectedPokemonSlice.reducer

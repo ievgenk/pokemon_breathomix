@@ -7,7 +7,6 @@ function App() {
 
   return (
     <main className="w-screen h-screen">
-      <h1>Hello</h1>
       <PokemonSearch />
       <PokemonCard />
     </main>
