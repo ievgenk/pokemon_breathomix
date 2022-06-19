@@ -1,4 +1,4 @@
-export interface PokemonAbility {
+export type PokemonAbility = {
   name: string
   description: string
 }
