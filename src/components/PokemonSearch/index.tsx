@@ -1,5 +1,8 @@
 import Fuse from 'fuse.js'
-import { useGetAllPokemonsQuery } from 'redux/pokemonApi'
+import {
+  useGetAllPokemonsQuery,
+  useGetPokemonByNameQuery
+} from 'redux/pokemonApi'
 import { useEffect, useState } from 'react'
 
 const PokemonSearch = () => {
@@ -11,6 +14,13 @@ const PokemonSearch = () => {
   const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null)
   const [suggestedPokemonNames, setSuggestedPokemonNames] = useState(() =>
     fuse.search(inputField)
+  )
+
+  const { data: fetchedSelectedPokemon } = useGetPokemonByNameQuery(
+    selectedPokemon || '',
+    {
+      skip: !selectedPokemon
+    }
   )
 
   useEffect(() => {
@@ -48,9 +58,11 @@ const PokemonSearch = () => {
           </button>
         </div>
         {suggestedPokemonNames.length ? (
-          <ul className="list-none">
+          <ul role="list" className="divide-y-2 divide-breathomix-main">
             {suggestedPokemonNames.map(({ item, refIndex }) => (
-              <li key={`${refIndex}-${item}`}>{item}</li>
+              <li key={`${refIndex}-${item}`} className="py-4" tabIndex={0}>
+                {item}
+              </li>
             ))}
           </ul>
         ) : null}
