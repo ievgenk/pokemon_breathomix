@@ -3,6 +3,6 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/'],
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts(x)'],
-  setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
+  setupFilesAfterEnv: ['@testing-library/jest-dom', './jest.setup.ts'],
   modulePaths: ['<rootDir>/src/', '<rootDir>/.jest']
 }

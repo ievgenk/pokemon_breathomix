@@ -11,8 +11,6 @@ type Props = {
 const PokemonAbility = ({ abilityName }: Props) => {
   const { data, isLoading, isError } =
     useGetPokemonAbilityByNameQuery(abilityName)
-  console.log(data)
-
   function retrievedAbilityDescription(
     effectEntries: EffectEntry[] | undefined
   ) {
