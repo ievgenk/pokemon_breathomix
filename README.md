@@ -1,6 +1,6 @@
 ![image](https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg)
 
-# Pokemon Breathomix
+# Pokemon Breathomix App
 
 Here is a little pokemon app that follows your provided criteria :)
 
