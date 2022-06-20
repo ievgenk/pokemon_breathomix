@@ -8,7 +8,7 @@ function App() {
   const { isError, isLoading } = useGetAllPokemonsQuery()
 
   return (
-    <main className="flex flex-col gap-10 justify-center items-center w-screen h-screen">
+    <main className="flex flex-col gap-10 justify-center items-center mt-10 w-screen h-screen">
       {isError ? (
         <ErrorMessage message="Pokemons could not get loaded" />
       ) : null}

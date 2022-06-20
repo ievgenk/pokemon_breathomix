@@ -1,10 +1,16 @@
-# React Tailwindcss Boilerplate build with Vite
+![image](https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg)
 
-This is a [ReactJS](https://reactjs.org) + [Vite](https://vitejs.dev) boilerplate to be used with [Tailwindcss](https://tailwindcss.com).
+# Pokemon Breathomix
 
-## What is inside?
+Here is a little pokemon app that follows your provided criteria :)
 
-This project uses many tools like:
+[Live Link](https://pokemon-breathomix.vercel.app/)
+
+Please let me know if you have any questions!
+
+## Tools that were used
+
+I used these tools to create this project:
 
 - [ReactJS](https://reactjs.org)
 - [Vite](https://vitejs.dev)
@@ -15,21 +21,7 @@ This project uses many tools like:
 - [Eslint](https://eslint.org)
 - [Prettier](https://prettier.io)
 
-## Getting Started
-
-### Install
-
-Create the project.
-
-```bash
-npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
-```
-
-Access the project directory.
-
-```bash
-cd my-app
-```
+### Running the app
 
 Install dependencies.
 
@@ -60,7 +52,3 @@ npm run build
 ```bash
 npm run test
 ```
-
-## License
-
-This project is licensed under the MIT License.
