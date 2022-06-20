@@ -29,7 +29,11 @@ const PokemonCard = () => {
             )
           })}
         </>
-      ) : null}
+      ) : (
+        <h2 className="my-auto text-2xl text-center text-breathomix-main">
+          Search for Pokemon...
+        </h2>
+      )}
     </div>
   )
 }
