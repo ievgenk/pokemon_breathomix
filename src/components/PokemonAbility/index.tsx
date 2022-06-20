@@ -1,3 +1,4 @@
+import ErrorMessage from 'components/ErrorMessage'
 import LoadingIndicator from 'components/Loading'
 import { useGetPokemonAbilityByNameQuery } from 'redux/pokemonApi'
 import { EffectEntry } from 'types/pokemonAbility'
@@ -20,14 +21,21 @@ const PokemonAbility = ({ abilityName }: Props) => {
       .effect
   }
 
-  return isLoading ? (
-    <LoadingIndicator />
-  ) : (
+  return (
     <>
-      <h3 className="text-xl text-breathomix-main underline">
-        {capitalizeString(abilityName)}
-      </h3>
-      <p>{retrievedAbilityDescription(data?.effect_entries)}</p>
+      {isError ? (
+        <ErrorMessage message="Could not fetch pokemon ability." />
+      ) : null}
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
+        <>
+          <h3 className="text-xl text-breathomix-main underline">
+            {capitalizeString(abilityName)}
+          </h3>
+          <p>{retrievedAbilityDescription(data?.effect_entries)}</p>
+        </>
+      )}
     </>
   )
 }

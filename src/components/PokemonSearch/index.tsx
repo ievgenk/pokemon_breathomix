@@ -8,6 +8,7 @@ import {
 import { selectPokemon } from 'redux/slices/selectedPokemonSlice'
 import { useAppDispatch } from 'hooks/hooks'
 import ResetPokemonButton from 'components/ClearPokemonButton'
+import ErrorMessage from 'components/ErrorMessage'
 
 const PokemonSearch = () => {
   const { data: pokemons } = useGetAllPokemonsQuery()
@@ -22,12 +23,10 @@ const PokemonSearch = () => {
     fuse.search(inputField)
   )
 
-  const { data: fetchedSelectedPokemon } = useGetPokemonByNameQuery(
-    selectedPokemon || '',
-    {
+  const { data: fetchedSelectedPokemon, isError: fetchError } =
+    useGetPokemonByNameQuery(selectedPokemon || '', {
       skip: !selectedPokemon
-    }
-  )
+    })
 
   useEffect(() => {
     if (fetchedSelectedPokemon) dispatch(selectPokemon(fetchedSelectedPokemon))
@@ -61,9 +60,10 @@ const PokemonSearch = () => {
     <>
       <div className="flex flex-col">
         {nameError ? (
-          <p className="mb-5 text-lg text-red-400">
-            Invalid pokemon name, please make sure to enter a valide name.
-          </p>
+          <ErrorMessage message="Invalid pokemon name, please make sure to enter a valid name." />
+        ) : null}
+        {fetchError ? (
+          <ErrorMessage message="Could not fetch selected pokemon, please try again." />
         ) : null}
         <div className="flex justify-between w-[800px]">
           <div>
